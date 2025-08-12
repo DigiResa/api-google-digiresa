@@ -1,0 +1,19 @@
+google_health:
+  path: /google/health
+  controller: App\Controller\Google\GoogleApiController::health
+  methods: [GET]
+
+google_availability:
+  path: /google/availability-lookup
+  controller: App\Controller\Google\GoogleApiController::availability
+  methods: [POST]
+
+google_create_booking:
+  path: /google/create-booking
+  controller: App\Controller\Google\GoogleApiController::create
+  methods: [POST]
+
+google_update_booking:
+  path: /google/update-booking
+  controller: App\Controller\Google\GoogleApiController::update
+  methods: [POST]

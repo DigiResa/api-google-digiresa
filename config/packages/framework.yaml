@@ -1,0 +1,24 @@
+framework:
+  secret: '%env(APP_SECRET)%'
+  http_method_override: false
+  php_errors:
+    log: true
+
+  # i18n / locales
+  default_locale: 'fr'
+
+  # pas de session pour une API stateless
+  session: false
+
+  # Serializer / Validator sans annotations (on pilote au besoin)
+  serializer:
+    enable_annotations: false
+  validation:
+    enable_annotations: false
+
+  # Rate limiter (pour /google)
+  rate_limiter:
+    google_api:
+      policy: fixed_window
+      limit: 300
+      interval: '1 minute'

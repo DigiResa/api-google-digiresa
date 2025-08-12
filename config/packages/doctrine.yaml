@@ -1,0 +1,29 @@
+doctrine:
+  dbal:
+    url: '%env(resolve:DATABASE_URL)%'
+    # server_version: '8.0'          # adapte à ta BDD (ex: '5.7', 'mariadb-10.6')
+    charset: utf8mb4
+    default_table_options:
+      collate: utf8mb4_unicode_ci
+    use_savepoints: true
+
+  orm:
+    auto_generate_proxy_classes: true
+    default_entity_manager: default
+    entity_managers:
+      default:
+        connection: default
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        # Active le mapping App\Entitiy (si tu n'as pas d'entités, ça ne gêne pas)
+        mappings:
+          App:
+            is_bundle: false
+            type: attribute         # ou "annotation"/"xml"/"yaml" selon ton projet
+            dir: '%kernel.project_dir%/src/Entity'
+            prefix: 'App\Entity'
+            alias: App
+
+when@test:
+  doctrine:
+    dbal:
+      dbname_suffix: '_test%env(default::TEST_TOKEN)%'

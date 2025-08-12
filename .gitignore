@@ -1,0 +1,16 @@
+/vendor/
+/var/
+/node_modules/
+/public/bundles/
+/public/build/
+/.idea/
+/.vscode/
+/.php-cs-fixer.cache
+/.phpunit.result.cache
+/.DS_Store
+
+# dotenv & runtime
+.env.local
+.env.local.php
+.env.*.local
+.php-version

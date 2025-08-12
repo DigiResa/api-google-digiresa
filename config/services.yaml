@@ -1,0 +1,26 @@
+parameters:
+  # expose le fuseau via param (tu peux aussi faire date_default_timezone_set en index.php)
+  app.timezone: '%env(APP_TIMEZONE)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # Abonné sécurité: vérifie X-Api-Key (+ HMAC optionnel) sur /google/**
+  App\Security\GoogleApiSubscriber:
+    arguments:
+      $apiKey: '%env(string:GOOGLE_API_KEY)%'
+      $hmacSecret: '%env(string:GOOGLE_API_HMAC_SECRET)%'
+    tags: ['kernel.event_subscriber']
+
+  # Services métier API Google
+  App\Service\Google\SlotEngine: ~
+  App\Service\Google\AvailabilityService: ~
+  App\Service\Google\BookingService: ~
+
+  # Contrôleurs (optionnel si tu utilises attributes + autoconfigure)
+  App\Controller\Google\:
+    resource: '../src/Controller/Google/'
+    tags: ['controller.service_arguments']
+
